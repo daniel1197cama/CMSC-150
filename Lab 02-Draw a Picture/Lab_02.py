@@ -1,5 +1,9 @@
 import arcade
 
+def draw_basketball():
+    arcade.draw_circle_filled(250, 100, 50, (165, 170, 173))
+    arcade.draw_circle_outline(250, 100, 50, (126, 130, 133))
+
 arcade.open_window("Hubble Space Telescope", 600, 600)
 
 # Remember to change background color to space black.
@@ -93,14 +97,9 @@ point_list = ((198, 405),
               (400, 405))
 arcade.draw_polygon_outline(point_list, (121, 123, 128), 5)
 
-#Load image of spacex
-file_name = "Images\SpaceX-Logo.svg.png"
-texture = arcade.load_texture(file_name)
-scale = .6
+draw_basketball()
 
 
-arcade.draw_circle_filled(250, 100, 50, (165, 170, 173))
-arcade.draw_circle_outline(250, 100, 50, (126, 130, 133))
 
 arcade.finish_render()
 arcade.run()
