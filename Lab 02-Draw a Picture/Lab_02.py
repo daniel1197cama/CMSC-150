@@ -1,5 +1,8 @@
 import arcade
 
+arcade.draw_circle_filled(250, 100, 50, (165, 170, 173))
+arcade.draw_circle_outline(250, 100, 50, (126, 130, 133))
+
 arcade.open_window("Hubble Space Telescope", 600, 600)
 
 # Remember to change background color to space black.
@@ -231,10 +234,6 @@ arcade.draw_rectangle_filled(550, 570, 20, 150, arcade.color.WHITE, 110)
 arcade.draw_rectangle_filled(487, 500, 20, 100, arcade.color.WHITE, 180)
 arcade.draw_rectangle_filled(472, 450, 10, 30, arcade.color.WHITE, 180)
 arcade.draw_rectangle_filled(502, 450, 10, 30, arcade.color.WHITE, 180)
-
-
-
-
 
 
 
