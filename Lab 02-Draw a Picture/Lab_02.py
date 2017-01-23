@@ -3,9 +3,9 @@ import arcade
 arcade.draw_circle_filled(250, 100, 50, (165, 170, 173))
 arcade.draw_circle_outline(250, 100, 50, (126, 130, 133))
 
-arcade.open_window("Hubble Space Telescope", 600, 600)
+arcade.open_window("SpaceX Dragon", 600, 600)
 
-# Remember to change background color to space black.
+# Set background color to space black and create the trunk.
 arcade.set_background_color((1, 8, 8))
 arcade.start_render()
 arcade.draw_lrtb_rectangle_filled(190, 400, 400, 250, (203, 214, 214))
@@ -78,12 +78,12 @@ arcade.draw_line(451, 295, 451, 250, (121, 123, 128), 8)
 
 arcade.draw_line(505, 370, 505, 295, (121, 123, 128), 5)
 arcade.draw_line(505, 295, 505, 250, (121, 123, 128), 5)
-# Draw eclipse filled
+# Draw a yellow ellipse
 arcade.draw_ellipse_filled(295, 402, 7, 105,
                            (224, 188, 40), 90)
 arcade.draw_ellipse_outline(295, 402, 7, 105,
                            (121, 123, 128), 1, 90)
-# draw spaceship upper part
+# draw spacecraft nose cone
 point_list = ((195, 405),
               (225, 450),
               (370, 450),
@@ -196,7 +196,7 @@ point_list = ((0, 0),
               (600, 0))
 arcade.draw_polygon_filled(point_list, (107, 151, 115))
 
-# Draw the amazonas river and its branches
+# Draw the amazon river and its branches
 point_list = ((300, 0),
               (280, 50),
               (270, 70),
@@ -234,9 +234,6 @@ arcade.draw_rectangle_filled(550, 570, 20, 150, arcade.color.WHITE, 110)
 arcade.draw_rectangle_filled(487, 500, 20, 100, arcade.color.WHITE, 180)
 arcade.draw_rectangle_filled(472, 450, 10, 30, arcade.color.WHITE, 180)
 arcade.draw_rectangle_filled(502, 450, 10, 30, arcade.color.WHITE, 180)
-
-
-
 
 
 arcade.finish_render()
