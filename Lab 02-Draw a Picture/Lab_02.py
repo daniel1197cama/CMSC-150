@@ -1,12 +1,10 @@
 import arcade
 
-arcade.draw_circle_filled(250, 100, 50, (165, 170, 173))
-arcade.draw_circle_outline(250, 100, 50, (126, 130, 133))
-
 arcade.open_window("SpaceX Dragon", 600, 600)
 
 # Set background color to space black and create the trunk.
-arcade.set_background_color((1, 8, 8))
+
+
 arcade.start_render()
 arcade.draw_lrtb_rectangle_filled(190, 400, 400, 250, (203, 214, 214))
 arcade.draw_lrtb_rectangle_outline(190, 400, 400, 250, (121, 123, 128), 5)
