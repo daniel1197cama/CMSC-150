@@ -1,6 +1,6 @@
 """
-This drawing is an update of Lab 2. The functions included in the Lab 03 reduced approx. 100 lines
- less than Lab 02.
+This drawing is an update of Lab 2. The functions included in the Lab 03 reduce approx. 100 lines
+ less than Lab 02, thus an animation of an astronaut is shown.
 """
 import arcade
 
@@ -128,45 +128,75 @@ def draw_earth():
                   (600, 0))
     arcade.draw_polygon_filled(point_list, (117, 161, 125))
 
+def on_draw(delta_time):
+    arcade.start_render()
+    # Draw the center and nose cone of spacecraft plus add details
+    draw_trunk(350, 326)
+    draw_table_rows(355, 350)
+    draw_details(265, 380, 20)
+    draw_arcdetails(435, 380, 20)
+    draw_nose_cone(245, 405)
+    draw_nose_cone_1(280, 450)
 
-arcade.open_window("SpaceX Dragon", 700, 600)
-arcade.set_background_color((1, 8, 8))
+    # Left side, solar panels.
+    draw_solar_panels(211, 310)
+    draw_solar_panels(156, 310)
+    draw_solar_panels(101, 310)
+    draw_solar_panels(46, 310)
+    # Right side, solar panels.
+    draw_solar_panels(489, 310)
+    draw_solar_panels(544, 310)
+    draw_solar_panels(599, 310)
+    draw_solar_panels(654, 310)
 
-# Draw the center and nose cone of spacecraft plus add details
-draw_trunk(350, 326)
-draw_table_rows(355, 350)
-draw_details(265, 380, 20)
-draw_arcdetails(435, 380, 20)
-draw_nose_cone(245, 405)
-draw_nose_cone_1(280, 450)
+    # Load image of spacex and dragon
+    file_name = "SpaceX-Logo.svg.png"
+    texture = arcade.load_texture(file_name)
+    scale = .05
+    arcade.draw_texture_rectangle(365, 488, scale * texture.width,
+                                  scale * texture.height, texture)
 
-# Left side, solar panels.
-draw_solar_panels(211, 310)
-draw_solar_panels(156, 310)
-draw_solar_panels(101, 310)
-draw_solar_panels(46, 310)
-# Right side, solar panels.
-draw_solar_panels(489, 310)
-draw_solar_panels(544, 310)
-draw_solar_panels(599, 310)
-draw_solar_panels(654, 310)
+    file_name = "LOGO-MagicDragon.png"
+    texture = arcade.load_texture(file_name)
+    scale = .4
+    arcade.draw_texture_rectangle(350, 280, scale * texture.width,
+                                  scale * texture.height, texture)
+    draw_door(355, 440)
+    draw_earth()
 
-# Load image of spacex and dragon
-file_name = "SpaceX-Logo.svg.png"
-texture = arcade.load_texture(file_name)
-scale = .05
-arcade.draw_texture_rectangle(365, 488, scale * texture.width,
-                              scale * texture.height, texture)
+    file_name = "How-to-Draw-Occupation-An-Astronaut-final-step-215x382.png"
+    texture = arcade.load_texture(file_name)
+    scale = .4
+    arcade.draw_texture_rectangle(on_draw.center_x, on_draw.center_y, scale * texture.width,
+                                  scale * texture.height, texture)
 
-file_name = "LOGO-MagicDragon.png"
-texture = arcade.load_texture(file_name)
-scale = .4
-arcade.draw_texture_rectangle(350, 280, scale * texture.width,
-                              scale * texture.height, texture)
-draw_door(355, 440)
-draw_earth()
+    on_draw.center_x += on_draw.delta_x * delta_time
+    on_draw.center_y += on_draw.delta_y * delta_time
+
+    if on_draw.center_x < 100:
+        on_draw.delta_x = on_draw.delta_x * - 1
+    if on_draw.center_x > 600:
+        on_draw.delta_x = on_draw.delta_x * - 1
+
+    if on_draw.center_y > 185:
+        on_draw.delta_y = on_draw.delta_y * - 1
+    if on_draw.center_y < 500:
+        on_draw.delta_y = on_draw.delta_y * - 1
 
 
+on_draw.center_x = 350
+on_draw.center_y = 300
+on_draw.delta_x = 50
+on_draw.delta_y = 50
 
-arcade.finish_render()
-arcade.run()
+
+def main():
+    arcade.open_window("SpaceX Dragon", 700, 600)
+    arcade.set_background_color((1, 8, 8))
+    arcade.schedule(on_draw, 1 / 80)
+
+
+    arcade.run()
+
+if __name__ == "__main__":
+    main()
