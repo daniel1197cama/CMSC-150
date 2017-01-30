@@ -1,6 +1,5 @@
 """
-This drawing is an update of Lab 2. The functions included in the Lab 03 reduce approx. 100 lines
- less than Lab 02, thus an animation of an astronaut is shown.
+This drawing is an update of Lab 2. It includes functions and a animation of an astronaut floating in space.
 """
 import arcade
 
@@ -194,8 +193,6 @@ def main():
     arcade.open_window("SpaceX Dragon", 700, 600)
     arcade.set_background_color((1, 8, 8))
     arcade.schedule(on_draw, 1 / 80)
-
-
     arcade.run()
 
 if __name__ == "__main__":
