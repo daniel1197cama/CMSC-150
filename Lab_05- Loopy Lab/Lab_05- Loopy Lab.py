@@ -88,8 +88,6 @@ for row in range(30):
         x = 905 + (10 * row)
         y = 595 - (10 * column)
         arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
-        if column % 2 == 0:
-            arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
-arcade.finish_render()
 
+arcade.finish_render()
 arcade.run()
