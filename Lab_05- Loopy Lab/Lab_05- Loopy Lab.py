@@ -23,9 +23,8 @@ arcade.draw_rectangle_outline(1050, 450, 300, 300, arcade.color.BLACK)
 for row in range(30):
     for column in range(30):
         x = 5 + (10 * row)  # Instead of zero, calculate the proper x location using row
-        y = 5 + (10 * column) # Instead of zero, calculate the proper y location using column
+        y = 5 + (10 * column)  # Instead of zero, calculate the proper y location using column
         arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
-
 
 # Section 2
 # Use the modulus operator and an if statement to select the color

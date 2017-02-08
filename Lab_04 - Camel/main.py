@@ -1,6 +1,6 @@
 import random
 
-#start main loop
+# Start main loop
 def main():
     # VARIABLES
     thirst = 0
@@ -27,6 +27,7 @@ def main():
         user_choice = input("What is your choice? ")
         if user_choice.upper() == "Q":
             done = True
+
         # Status
         elif user_choice.upper() == "E":
             print("\nMiles traveled: ", miles_traveled)
@@ -44,8 +45,14 @@ def main():
             miles_traveled += move
             print("\nMiles traveled: ", move)
             thirst += 1
-            camel_tiredness += random.randrange(1,4)
+            camel_tiredness += random.randrange(1, 4)
             natives_traveled += random.randrange(7, 15)
+            if not done and random.randrange(1, 21) == 1:
+                print("Wow you found an oasis.\nYour canteens are filled and you are no longer thirsty.")
+                print("Your camel is also recharged!")
+                thirst = 0
+                drinks = 3
+                camel_tiredness = 0
 
         # Move moderate speed
         elif user_choice.upper() == "B":
@@ -55,6 +62,12 @@ def main():
             thirst += 1
             camel_tiredness += 1
             natives_traveled += random.randrange(8, 16)
+            if not done and random.randrange(1, 21) == 1:
+                print("Wow you found an oasis.\nYour canteens are filled and you are no longer thirsty.")
+                print("Your camel is also recharged!")
+                thirst = 0
+                drinks = 3
+                camel_tiredness = 0
 
         # Drink from canteen
         elif user_choice.upper() == "A":
@@ -87,12 +100,4 @@ def main():
         if miles_traveled >= 200:
             print("You have made it across the desert! You Win!")
             done = True
-
-        if not done and random.randrange(1, 21) == 18:
-            print("Wow you found an oasis.\nYour canteens are filled and you are no longer thirsty.")
-            print("Your camel is also recharged!")
-            thirst = 0
-            drinks = 3
-            camel_tiredness = 0
-
 main()
