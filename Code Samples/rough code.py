@@ -93,7 +93,7 @@ home_address.line2 = "Carver Science Building"
 home_address.city =  "Indianola"
 home_address.state = "IA"
 home_address.zip = "50125"
-"""
+
 class Dog():
     def __init__(self):
         self.age = 0
@@ -109,3 +109,24 @@ dog_information.age = "Willi"
 dog_information.weight = 15
 
 dog_information.bark()
+"""
+
+class Ball():
+    def __init__(self):
+        self.x = 0
+        self.y= 0
+        self.change_x = 0
+        self.change_y = 0
+
+    def move(self):
+        self.x += self.change_x
+        self.y += self.change_y
+
+def main():
+    my_ball = Ball()
+    my_ball.x = 10
+    my_ball.y = 15
+    my_ball.change_x = 1
+    my_ball.change_y = 0
+
+
