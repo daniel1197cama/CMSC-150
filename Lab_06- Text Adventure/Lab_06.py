@@ -17,7 +17,7 @@ room = ["You are down the hallway", 4, 8, 9, 6]
 room_list.append(room)
 room = ["You are in the kitchen", 5, None, None, 7]
 room_list.append(room)
-room = ["You are in the backyard", ]
+room = ["You are in the backyard",7, None, None, None]
 room_list.append(room)
 
 current_room = 0
@@ -32,10 +32,37 @@ while not done:
     print()
     print(room_list[current_room][0])
     user_input = input("What do you want to do?: ")
-    if user_input.upper() == "NORTH":
+    if user_input.upper() == "NORTH" or user_input.upper()== "N":
         next_room = room_list[current_room][1]
-    if next_room == None:
-        print("You can't go that way!")
-    else:
-        current_room = next_room
+
+        if next_room == None:
+            print("You can't go that way!")
+        if next_room != None:
+            current_room = next_room
+
+    elif user_input.upper() == "EAST" or user_input.upper()== "E":
+        next_room = room_list[current_room][2]
+        if next_room == None:
+            print("You can't go that way!")
+        if next_room != None:
+            current_room = next_room
+
+    elif user_input.upper() == "SOUTH" or user_input.upper()== "S":
+        next_room = room_list[current_room][3]
+        if next_room == None:
+            print("You can't go that way!")
+        if next_room != None:
+            current_room = next_room
+
+    elif user_input.upper() == "WEST" or user_input.upper()== "W":
+        next_room = room_list[current_room][4]
+        if next_room == None:
+            print("You can't go that way!")
+        if next_room != None:
+            current_room = next_room
+
+
+
+
+
 
