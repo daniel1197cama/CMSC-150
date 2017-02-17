@@ -26,13 +26,18 @@ print("NORTH")
 print("SOUTH")
 print("EAST")
 print("WEST")
+print("QUIT")
 
 done = False
 while not done:
     print()
     print(room_list[current_room][0])
     user_input = input("What do you want to do?: ")
-    if user_input.upper() == "NORTH" or user_input.upper()== "N":
+
+    if user_input.upper() == "QUIT" or user_input.upper() == "Q":
+        done = True
+
+    elif user_input.upper() == "NORTH" or user_input.upper()== "N":
         next_room = room_list[current_room][1]
 
         if next_room == None:
@@ -60,6 +65,9 @@ while not done:
             print("You can't go that way!")
         if next_room != None:
             current_room = next_room
+
+    else:
+        print("I don't understand what you typed.")
 
 
 
