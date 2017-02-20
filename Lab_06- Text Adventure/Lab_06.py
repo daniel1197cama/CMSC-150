@@ -7,7 +7,7 @@ room_list = []
 room = ["This is were everything starts. Make sure you have your headset on. You see two doors: "
         "\none to your left and the other down the room. Have fun!", None, None, 5, 1]
 room_list.append(room)
-room = ["You are in the Great Wall of China! It was built over 2,000 years ago to "
+room = ["You are in the Great Wall of China! It was built over 2,000 years ago "
         "\nto protect the borders of the Chinese Empire from invading Mongols.", None, 0, 4, 2]
 room_list.append(room)
 room = ["You are in the Christ the Redeemer Statue in Rio the Janeiro, Brazil!"
