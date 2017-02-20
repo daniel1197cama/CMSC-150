@@ -38,7 +38,7 @@ room_list.append(room)
 room = ["You are in the Great Pyramid of Giza in Egypt! This pyramid is one of the Seven Wonders of the Ancient World "
         "and it is a marvel of human engineering and construction. \nThis Pyramid was built between 2589 and 2504 B.C."
         " Isn't amazing!\nYou have come to the end of this wonderful journey proceed to your right and we hope to see "
-        "you again soon! ", None, 9, None, None]
+        "you again soon! ", None, 9, None, 7]
 room_list.append(room)
 room = ["This world is so beautiful and we are glad that you took the time to explore it through the VR experience!"
         "\nPlease enter the command 'QUIT' to take your VR headset off.", None, None, None, None]
