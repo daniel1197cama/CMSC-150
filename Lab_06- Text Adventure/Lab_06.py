@@ -27,7 +27,7 @@ room = ["You are in the Roman Colosseum in Rome! The Colosseum was built between
         0, None, None, 4]
 room_list.append(room)
 room = ["Your are in the Taj Majal in India! It was built between 1631 and 1653 dedicated for the wife of "
-        "Emperor Shah Jahan. \nMore than 1,00 elephants were used to transport the construction materials."
+        "Emperor Shah Jahan. \nMore than 1,000 elephants were used to transport the construction materials."
         "\nYour VR headset shows 2 different doors, to your right and straight up.", 3, 7, None, None]
 room_list.append(room)
 room = ["You are Petra Jordan! Petra was the capital of the Nabataean Empire. They existed form ( B.C. to 40 A.D."
