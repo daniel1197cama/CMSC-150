@@ -27,10 +27,10 @@ class Cloud:
 
     def animate(self):
         self.position_x += self.change_x
-        if self.position_x < 45:
+        if self.position_x < 50:
             self.change_x *= -1
 
-        if self.position_x > SCREEN_WIDTH - 55:
+        if self.position_x > SCREEN_WIDTH - 60:
             self.change_x *= -1
 
 
@@ -54,6 +54,7 @@ class Parachutist:
         self.position_y = position_y
         self.change_x = change_x
         self.change_y = change_y
+        self.jump_sound = arcade.load_sound("jump3.ogg")
 
     def draw(self):
         file_name = "parachutist.png"
@@ -68,15 +69,19 @@ class Parachutist:
 
         if self.position_x < 45:
             self.position_x = 45
+            arcade.play_sound(self.jump_sound)
 
-        if self.position_x > SCREEN_WIDTH - 50:
-            self.position_x = SCREEN_WIDTH - 50
+        if self.position_x > SCREEN_WIDTH - 35:
+            self.position_x = SCREEN_WIDTH - 35
+            arcade.play_sound(self.jump_sound)
 
         if self.position_y < 70:
             self.position_y = 70
+            arcade.play_sound(self.jump_sound)
 
         if self.position_y > SCREEN_HEIGHT - 70:
             self.position_y = SCREEN_HEIGHT - 70
+            arcade.play_sound(self.jump_sound)
 
 
 class MyApplication(arcade.Window):
@@ -88,6 +93,8 @@ class MyApplication(arcade.Window):
         arcade.set_background_color((67, 194, 232))
         # Make the mouse disappear when it is over the window.
         self.set_mouse_visible(False)
+        # Load the sound when the application starts
+        self.upgrade_sound = arcade.load_sound("upgrade1.ogg")
 
         self.parachutist = Parachutist(300, 400, 0, 0)
         # Add two clouds to the list
@@ -118,6 +125,10 @@ class MyApplication(arcade.Window):
     def on_mouse_motion(self, x, y, dx, dy):
         self.spaceship.position_x = x
         self.spaceship.position_y = y
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        if button == arcade.MOUSE_BUTTON_LEFT:
+            arcade.play_sound(self.upgrade_sound)
 
     def on_key_press(self, key, modifiers):
         # Called whenever the user presses a key.
