@@ -191,7 +191,7 @@ on_draw.delta_y = 50
 
 def main():
     arcade.open_window("SpaceX Dragon", 700, 600)
-    arcade.set_background_color((1, 8, 8))
+    arcade.set_background_color(1, 8, 8)
     arcade.schedule(on_draw, 1 / 80)
     arcade.run()
 

@@ -1,103 +1,141 @@
 """
-Starting Template
+
 """
 import arcade
 
 SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 600
-BALL_RADIUS = 20
+MOVEMENT_SPEED = 3
+
+
+def draw_cloud(position_x, position_y):
+    arcade.draw_circle_filled(position_x, position_y, 35, arcade.color.WHITE)
+    arcade.draw_circle_filled(position_x - 35, position_y, 25, arcade.color.WHITE)
+    arcade.draw_circle_filled(position_x + 35, position_y, 25, arcade.color.WHITE)
+
+
+class Cloud:
+    def __init__(self, position_x, position_y, change_x, change_y):
+
+        self. position_x = position_x
+        self.position_y = position_y
+        self.change_x = change_x
+        self.change_y = change_y
+
+    def draw(self):
+        draw_cloud(self.position_x, self.position_y)
+
+    def animate(self):
+        self.position_x += self.change_x
+        if self.position_x < 45:
+            self.change_x *= -1
+
+        if self.position_x > SCREEN_WIDTH - 55:
+            self.change_x *= -1
+
+
+class Spaceship:
+    def __init__(self, position_x, position_y):
+        self.position_x = position_x
+        self.position_y = position_y
+
+    def draw(self):
+        # Upload picture of spaceship used in Lab 03
+        file_name = "spaceship1.png"
+        texture = arcade.load_texture(file_name)
+        scale = .4
+        arcade.draw_texture_rectangle(self.position_x, self.position_y, scale * texture.width,
+                                      scale * texture.height, texture)
+
+
+class Parachutist:
+    def __init__(self, position_x, position_y, change_x, change_y):
+        self.position_x = position_x
+        self.position_y = position_y
+        self.change_x = change_x
+        self.change_y = change_y
+
+    def draw(self):
+        file_name = "parachutist.png"
+        texture = arcade.load_texture(file_name)
+        scale = .4
+        arcade.draw_texture_rectangle(self.position_x, self.position_y, scale * texture.width,
+                                      scale * texture.height, texture)
+
+    def animate(self):
+        self.position_y += self.change_y
+        self.position_x += self.change_x
+
+        if self.position_x < 45:
+            self.position_x = 45
+
+        if self.position_x > SCREEN_WIDTH - 50:
+            self.position_x = SCREEN_WIDTH - 50
+
+        if self.position_y < 70:
+            self.position_y = 70
+
+        if self.position_y > SCREEN_HEIGHT - 70:
+            self.position_y = SCREEN_HEIGHT - 70
 
 
 class MyApplication(arcade.Window):
     """
     Main application class.
     """
-    def __init__(self, width, height):
-        super().__init__(width, height)
+    def __init__(self, width, height, title):
+        super().__init__(width, height, title)
+        arcade.set_background_color((67, 194, 232))
+        # Make the mouse disappear when it is over the window.
+        self.set_mouse_visible(False)
 
-        self.spaceship_x_position = BALL_RADIUS
-        self.spaceship_x_pixels_per_second = 70
+        self.parachutist = Parachutist(300, 400, 0, 0)
+        # Add two clouds to the list
+        self.cloud_list = []
+        cloud = Cloud(100, 150, 3, 3)
+        self.cloud_list.append(cloud)
 
-        arcade.set_background_color(arcade.color.WHITE)
+        cloud = Cloud(150, 500, 2, 3)
+        self.cloud_list.append(cloud)
 
-        # Note:
-        # You can change how often the animate() method is called by using the
-        # set_update_rate() method in the parent class.
-        # The default is once every 1/80 of a second.
-        # self.set_update_rate(1/80)
+        cloud = Cloud(400, 350, -3, -1)
+        self.cloud_list.append(cloud)
+
+        self.spaceship = Spaceship(150, 100)
 
     def on_draw(self):
         arcade.start_render()
-        # Upload picture of spaceship used in Lab 03
-        file_name = "spaceship1.png"
-        texture = arcade.load_texture(file_name)
-        scale = .4
-        arcade.draw_texture_rectangle(self.spaceship_x_position, SCREEN_HEIGHT // 2 , scale * texture.width,
-                                      scale * texture.height, texture)
-        # Draw the text
-        arcade.draw_text("This is a simple template to start your game.",
-                         10, SCREEN_HEIGHT // 2, arcade.color.BLACK, 20)
+        for cloud in self.cloud_list:
+            cloud.draw()
+        self.spaceship.draw()
+        self.parachutist.draw()
 
     def animate(self, delta_time):
-        """
-        All the logic to move, and the game logic goes here.
-        """
-        # Move the ball
-        self.spaceship_x_position += self.spaceship_x_pixels_per_second * delta_time
+        self.parachutist.animate()
+        for cloud in self.cloud_list:
+            cloud.animate()
 
-        # Did the ball hit the right side of the screen while moving right?
-        if self.spaceship_x_position > SCREEN_WIDTH - BALL_RADIUS \
-                and self.spaceship_x_pixels_per_second > 0:
-            self.spaceship_x_pixels_per_second *= -1
+    def on_mouse_motion(self, x, y, dx, dy):
+        self.spaceship.position_x = x
+        self.spaceship.position_y = y
 
-        # Did the ball hit the left side of the screen while moving left?
-        if self.spaceship_x_position < BALL_RADIUS \
-                and self.spaceship_x_pixels_per_second < 0:
-            self.spaceship_x_pixels_per_second *= -1
+    def on_key_press(self, key, modifiers):
+        # Called whenever the user presses a key.
+        if key == arcade.key.LEFT:
+            self.parachutist.change_x = -MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            self.parachutist.change_x = MOVEMENT_SPEED
+        elif key == arcade.key.UP:
+            self.parachutist.change_y = MOVEMENT_SPEED
+        elif key == arcade.key.DOWN:
+            self.parachutist.change_y = -MOVEMENT_SPEED
 
-    def on_key_press(self, key, key_modifiers):
-        """
-        Called whenever a key on the keyboard is pressed.
+    def on_key_release(self, key, modifiers):
+        # Called whenever a user releases a key.
+        if key == arcade.key.LEFT or key == arcade.key.RIGHT:
+            self.parachutist.change_x = 0
+        elif key == arcade.key.UP or key == arcade.key.DOWN:
+            self.parachutist.change_y = 0
 
-        For a full list of keys, see:
-        http://pythonhosted.org/arcade/arcade.key.html
-        """
-
-        # See if the user hit Shift-Space
-        # (Key modifiers are in powers of two, so you can detect multiple
-        # modifiers by using a bit-wise 'and'.)
-        if key == arcade.key.SPACE and key_modifiers == arcade.key.MOD_SHIFT:
-            print("You pressed shift-space")
-
-        # See if the user just hit space.
-        elif key == arcade.key.SPACE:
-            print("You pressed the space bar.")
-
-    def on_key_release(self, key, key_modifiers):
-        """
-        Called whenever the user lets off a previously pressed key.
-        """
-        if key == arcade.key.SPACE:
-            print("You stopped pressing the space bar.")
-
-    def on_mouse_motion(self, x, y, delta_x, delta_y):
-        """
-        Called whenever the mouse moves.
-        """
-        pass
-
-    def on_mouse_press(self, x, y, button, key_modifiers):
-        """
-        Called when the user presses a mouse button.
-        """
-        pass
-
-    def on_mouse_release(self, x, y, button, key_modifiers):
-        """
-        Called when a user releases a mouse button.
-        """
-        pass
-
-window = MyApplication(SCREEN_WIDTH, SCREEN_HEIGHT)
-
+window = MyApplication(500, 600, "Spaceship Flying")
 arcade.run()
