@@ -5,6 +5,48 @@ SPRITE_SCALING = 0.5
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+# I will need to inherit the parent class so I can add new features to the original coins
+
+
+class Coin(arcade.Sprite):
+    def __init__(self, filename, sprite_scaling):
+        super(). __init__(filename, sprite_scaling)
+        self.change_x = 0
+        self.change_y = 0
+
+    def update(self):
+        self.center_x += self.change_x
+        self.center_y += self.change_y
+
+        if self.left < 0:
+            self.change_x *= -1
+
+        if self.right > SCREEN_WIDTH:
+            self.change_x *= -1
+
+        if self.bottom < 0:
+            self.change_y *= -1
+
+        if self.top > SCREEN_HEIGHT:
+            self.change_y *= -1
+
+        """
+        if self.left < 0:
+            self.change_x *= -1
+
+        if self.right > SCREEN_WIDTH:
+            self.change_x *= -1
+
+        if self.bottom < 0 and self.change_y < 0:
+            self.change_y *= -1
+
+        if self.top > SCREEN_HEIGHT and self.change_y < SCREEN_HEIGHT:
+            self.change_y *= -1
+
+        if self.top < 0:
+            self.center_x = random.randrange(SCREEN_WIDTH)
+            self.center_y = random.randrange(SCREEN_HEIGHT + 20 , SCREEN_HEIGHT + 20)
+        """
 
 
 class MyApplication(arcade.Window):
@@ -33,9 +75,10 @@ class MyApplication(arcade.Window):
         self.all_sprites_list.append(self.player_sprite)
 
         for i in range(50):
-            coin = arcade.Sprite("coin_01.png", SPRITE_SCALING * 0.5)
+            coin = Coin("coin_01.png", SPRITE_SCALING * 0.5)
             coin.center_x = random.randrange(SCREEN_WIDTH)
             coin.center_y = random.randrange(SCREEN_HEIGHT)
+
             self.all_sprites_list.append(coin)
             self.coin_list.append(coin)
 
@@ -49,11 +92,12 @@ class MyApplication(arcade.Window):
         self.player_sprite.center_y = y
 
     def animate(self, delta_time):
+        self.all_sprites_list.update()
         hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.coin_list)
         for coin in hit_list:
             coin.kill()
             self.score += 1
-
+        """
         if len(self.coin_list) == 0:
             for i in range(50):
                 coin = arcade.Sprite("coin_01.png", SPRITE_SCALING * 0.5)
@@ -62,7 +106,7 @@ class MyApplication(arcade.Window):
                 self.all_sprites_list.append(coin)
                 self.coin_list.append(coin)
             print("EMPTY!!")
-
+        """
 
 
 def main():
