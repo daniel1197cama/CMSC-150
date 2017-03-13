@@ -106,6 +106,9 @@ class MyApplication(arcade.Window):
                 self.all_sprites_list.append(coin)
                 self.coin_list.append(coin)
             print("EMPTY!!")
+        if len(self.star_list) == 0:
+            message = "Game Over"
+            arcade.draw_text(message, 400, 300, arcade.color.WHITE, 50)
         """
 
 

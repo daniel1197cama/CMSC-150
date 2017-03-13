@@ -97,6 +97,7 @@ class MyApplication(arcade.Window):
         # Add two clouds to the list
         self.cloud_list = []
         cloud = Cloud(100, 150, 3, 3)
+
         self.cloud_list.append(cloud)
 
         cloud = Cloud(150, 500, 2, 3)
